@@ -165,6 +165,8 @@ class Feed:
                 # Update other fields directly
                 setattr(detail, key, value)
 
+        detail.save()
+
         logging.info(f"Updated podcast detail for podcast {self.podcast_id}")
 
     def get_podcast_episodes(self):
