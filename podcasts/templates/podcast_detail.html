@@ -1,0 +1,69 @@
+<!-- podcast_detail.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            <h2>{{ podcast.name }}</h2>
+            <img src="{{ podcast.detail.image_location }}" alt="{{ podcast.name }}" class="img-fluid mb-3">
+
+            <table class="table">
+                <tr>
+                    <th>Title</th>
+                    <td>{{ podcast.detail.title|default:"Not provided" }}</td>
+                </tr>
+                <tr>
+                    <th>Link</th>
+                    <td>{{ podcast.detail.link|default:"Not provided" }}</td>
+                </tr>
+                <tr>
+                    <th>Language</th>
+                    <td>{{ podcast.detail.language|default:"Not provided" }}</td>
+                </tr>
+                <tr>
+                    <th>Copyright</th>
+                    <td>{{ podcast.detail.copyright|default:"Not provided" }}</td>
+                </tr>
+                <tr>
+                    <th>Author</th>
+                    <td>{{ podcast.detail.author|default:"Not provided" }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ podcast.detail.description|default:"Not provided" }}</td>
+                </tr>
+                <tr>
+                    <th>Owner</th>
+                    <td>{{ podcast.detail.owner|default:"Not provided" }}</td>
+                </tr>
+                <tr>
+                    <th>Owner Email</th>
+                    <td>{{ podcast.detail.owner_email|default:"Not provided" }}</td>
+                </tr>
+                <tr>
+                    <th>Image Location</th>
+                    <td>{{ podcast.detail.image_location|default:"Not provided" }}</td>
+                </tr>
+                <tr>
+                    <th>Category</th>
+                    <td>{{ podcast.detail.category|default:"Not provided" }}</td>
+                </tr>
+                <tr>
+                    <th>Explicit</th>
+                    <td>{{ podcast.detail.explicit|yesno:"Yes,No" }}</td>
+                </tr>
+                <tr>
+                    <th>Keywords</th>
+                    <td>
+                        {% for keyword in podcast.detail.keywords.all %}
+                            {{ keyword.word }}{% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            Not provided
+                        {% endfor %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}

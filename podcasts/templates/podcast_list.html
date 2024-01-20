@@ -4,14 +4,30 @@
 
 {% block title %}Podcast List - Podcast Downloader{% endblock %}
 
+
+
 {% block content %}
-    <div class="mb-3">
-        <a href="{% url 'add_podcast' %}" class="btn btn-primary">Add Podcast</a>
+    <div class="mb-2">
+        <a href="{% url 'refresh_all_metadata' %}" class="btn btn-secondary">Refresh All Metadata</a>
     </div>
 
-    <ul class="list-group">
+    <div class="mb-2">
+        <a href="{% url 'parse_metadata' %}" class="btn btn-secondary">Parse Metadata</a>
+    </div>
+
+    <div class="row">
         {% for podcast in podcasts %}
-            <li class="list-group-item">{{ podcast.name }} - {{ podcast.rss_url }}</li>
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" src="{{ podcast.detail.image_location }}" alt="Thumbnail">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{% url 'podcast_detail' podcast.id %}">{{ podcast.name }}</a>
+                        </h5>
+                        <p class="card-text">{{ podcast.detail.description|truncatewords:20 }}</p>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}
