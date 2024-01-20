@@ -33,7 +33,9 @@ class PodcastDetail(models.Model):
     keywords = models.ManyToManyField(Keyword)
 
     def __str__(self):
-        return self.title
+        if self.title is not None:
+            return self.title
+        return f"PodcastDetail (ID: {self.id})"
 
 
 class PodcastCache(models.Model):
